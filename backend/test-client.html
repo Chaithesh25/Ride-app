@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Socket Test</title>
+</head>
+<body>
+
+<h2>Check Console</h2>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+  const socket = io("http://localhost:3000", {
+  transports: ["websocket", "polling"]
+});
+
+  socket.on("connect", () => {
+    console.log("Connected:", socket.id);
+  });
+
+  socket.on("ride-requested", (data) => {
+    console.log("🚕 Ride Requested:", data);
+  });
+
+  socket.on("ride-accepted", (data) => {
+    console.log("✅ Ride Accepted:", data);
+  });
+</script>
+
+</body>
+</html>
