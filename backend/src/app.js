@@ -13,12 +13,11 @@ app.use(cors({
 
 app.use(express.json());
 
-// routes
+// 
 app.use("/", rideRoutes);
 app.use("/users", userRoutes);
 
 
-app.get("/check", (req, res) => {
-  res.send("API working");
-});
+
+
 module.exports = app;
