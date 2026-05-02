@@ -2,24 +2,20 @@
 require("dotenv").config();
 
 const http = require("http");
-const app = require("./app");
 const connectDB = require("./config/db");
 const { initSocket } = require("./sockets/socket");
+const createApp = require("./app");
 
 connectDB();
 
-const server = http.createServer(app);
+const server = http.createServer();
 
 // init socket
 const io = initSocket(server);
 
-// attach io to req
-app.use((req, res, next) => {
-  req.io = io;
-  next();
-});
+const app = createApp(io);
 
-
+server.on("request", app);
 
 server.listen(3000, () => {
   console.log("Server running on port 3000");

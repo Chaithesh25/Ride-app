@@ -3,7 +3,12 @@ const Ride = require("../models/ride.model");
 
 exports.requestRide = async (req, res) => {
   try {
-    const ride = await Ride.create({ status: "requested" });
+    const ride = await Ride.create({
+      userId: req.user.id, 
+      pickup: req.body.pickup,
+      drop: req.body.drop,
+      status: "requested"
+     });
 
     req.io.emit("ride-requested", ride);
 

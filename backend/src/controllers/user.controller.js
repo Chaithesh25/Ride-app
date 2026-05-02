@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const bcrypt = require('bcrypt');
 
 exports.createUser = async (req, res)=>{
     try{
@@ -6,12 +7,16 @@ exports.createUser = async (req, res)=>{
 
         console.log('Received user data:', {name, email, password});
 
+        //hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+
         //save to database
 
         const user = await User.create({
             name,
             email,
-            password
+            password:hashedPassword
         });
 
         //sending respose
