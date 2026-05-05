@@ -1,5 +1,6 @@
 # Ignore environment variables (VERY IMPORTANT)
 .env
+.env.*
 
 # Node modules (huge folder, never commit)
 node_modules/
